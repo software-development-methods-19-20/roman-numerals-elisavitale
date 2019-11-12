@@ -10,18 +10,24 @@ public class DecimalToRomanNumeralTest {
     public DecimalToRomanNumeralTest(){
     }
 
+    private void check(int decimal, String expected) {
+        RomanNumeral romanNumeral = new RomanNumeral(decimal);
+        Assertions.assertEquals(expected, romanNumeral.toString());
+    }
+
     @Test
     void zeroIsEmptyString() {
-        RomanNumeral romanNumeral = new RomanNumeral(0);
-        Assertions.assertEquals("", romanNumeral.toString());
+        check(0, "");
     }
 
     @Test
     void oneIsI() {
-        RomanNumeral romanNumeral = new RomanNumeral(1);
-        Assertions.assertEquals("I", romanNumeral.toString());
+        check(1, "I");
     }
 
-
+    @Test
+    void fiveIsV() {
+        check(5, "V");
+    }
 
 }

@@ -36,7 +36,11 @@ public class DecimalToRomanNumeralTest {
     }
 
     @Test
-    @Disabled
+    void fourIsIV() {
+        check(4, "IV");
+    }
+
+    @Test
     void fiveIsV() {
         check(5, "V");
     }

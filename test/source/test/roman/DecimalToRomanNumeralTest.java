@@ -26,6 +26,17 @@ public class DecimalToRomanNumeralTest {
     }
 
     @Test
+    void twoIsII() {
+        check(2, "II");
+    }
+
+    @Test
+    void threeIsIII() {
+        check(3, "III");
+    }
+
+    @Test
+    @Disabled
     void fiveIsV() {
         check(5, "V");
     }

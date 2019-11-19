@@ -39,6 +39,11 @@ public class RomanNumeral {
     }
 
     private String decomposeAndWriteNumber() {
+        return getRomanUnits();
+    }
+
+    private String getRomanUnits() {
+        decimal %= 10;
         if (decimal < 4 ) {
             return "I".repeat(decimal);
         } else if (decimal == 4) {

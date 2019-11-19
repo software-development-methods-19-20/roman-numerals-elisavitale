@@ -49,4 +49,7 @@ public class DecimalToRomanNumeralTest {
 
     @Test
     void nineIsIX() { check(9, "IX"); }
+
+    @Test
+    void elevenIsXI() { check(11, "XI"); }
 }

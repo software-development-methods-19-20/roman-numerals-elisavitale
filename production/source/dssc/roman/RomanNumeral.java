@@ -11,6 +11,10 @@ public class RomanNumeral {
         table.put(1, "I");
         table.put(5, "V");
         table.put(10, "X");
+        table.put(50, "L");
+        table.put(100, "C");
+        table.put(500, "D");
+        table.put(1000, "M");
         return table;
     }
 
@@ -41,8 +45,22 @@ public class RomanNumeral {
         number = (number % 100) - (number % 10) ;
         if (foundInConversionTable(number))
             return conversionTable.get(number);
-        else
-            return "X".repeat(number);
+        else if (number % 50 == 40)
+            return "X" + fiftyOrHundred(number);
+        else return Fifty(number) + Tens(number);
+    }
+
+    private String fiftyOrHundred(int number) {
+        return conversionTable.get(number + 10);
+    }
+
+    public String Fifty(int number) {
+        if (number >= 50) return "L";
+        else return "";
+    }
+
+    public String Tens(int number) {
+        return "X".repeat((number % 50) / 10);
     }
 
     private String getRomanUnits(int number) {

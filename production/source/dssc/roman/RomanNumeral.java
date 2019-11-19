@@ -45,14 +45,23 @@ public class RomanNumeral {
 
     private String getRomanUnits() {
         decimal %= 10;
-        if (decimal < 4 ) {
-            return "I".repeat(decimal);
-        } else if (decimal == 4) {
-            return "I" + "V";
-        } else if (decimal < 9) {
-            return "V" + "I".repeat(decimal % 5);
+        if (decimal % 5 == 4) {
+            return "I" + fiveOrTen();
         } else {
-            return "I" + "X";
+            return Five() + Ones();
         }
+    }
+
+    private String fiveOrTen() {
+        return conversionTable.get(decimal + 1);
+    }
+
+    private String Ones() {
+        return "I".repeat(decimal % 5);
+    }
+
+    private String Five() {
+        if (decimal >= 5) return "V";
+        else return "";
     }
 }

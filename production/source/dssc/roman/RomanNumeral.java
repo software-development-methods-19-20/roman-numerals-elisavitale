@@ -4,15 +4,9 @@ import java.util.HashMap;
 
 public class RomanNumeral {
 
-    private int decimal;
-
-    public RomanNumeral(int decimal){
-        this.decimal = decimal;
-    }
-
     private HashMap<Integer, String> conversionTable = getConversionTable();
 
-    public static HashMap<Integer, String> getConversionTable() {
+    public HashMap<Integer, String> getConversionTable() {
         HashMap<Integer, String> table = new HashMap<>();
         table.put(1, "I");
         table.put(5, "V");
@@ -20,48 +14,56 @@ public class RomanNumeral {
         return table;
     }
 
-    public String fromArabicToRomanNumber() {
-        if (decimal == 0) {
+    public String fromArabicToRoman(int number) {
+        if (number == 0) {
             return "";
         } else {
-            return writeRomanNumeral();
+            return writeRomanNumeral(number);
         }
     }
 
-    public String writeRomanNumeral() {
-        if (decimalInConversionTable()) {
-            return conversionTable.get(decimal);
+    public String writeRomanNumeral(int number) {
+        if (foundInConversionTable(number)) {
+            return conversionTable.get(number);
         } else
-            return decomposeAndWriteNumber();
+            return decomposeAndWriteNumber(number);
     }
 
-    public boolean decimalInConversionTable() {
-        return conversionTable.containsKey(decimal);
+    public boolean foundInConversionTable(int number) {
+        return conversionTable.containsKey(number);
     }
 
-    private String decomposeAndWriteNumber() {
-        return getRomanUnits();
+    private String decomposeAndWriteNumber(int number) {
+        return getRomanTens(number) + getRomanUnits(number);
     }
 
-    private String getRomanUnits() {
-        decimal %= 10;
-        if (decimal % 5 == 4) {
-            return "I" + fiveOrTen();
+    private String getRomanTens(int number) {
+        number = (number % 100) - (number % 10) ;
+        if (foundInConversionTable(number))
+            return conversionTable.get(number);
+        else
+            return "X".repeat(number);
+    }
+
+    private String getRomanUnits(int number) {
+        number %= 10;
+        if (number % 5 == 4) {
+            return "I" + fiveOrTen(number);
         } else {
-            return Five() + Ones();
+            return Five(number) + Ones(number);
         }
     }
 
-    private String fiveOrTen() {
-        return conversionTable.get(decimal + 1);
+    private String fiveOrTen(int number) {
+        return conversionTable.get(number + 1);
     }
 
-    private String Ones() {
-        return "I".repeat(decimal % 5);
+    private String Ones(int number) {
+        return "I".repeat(number % 5);
     }
 
-    private String Five() {
-        if (decimal >= 5) return "V";
+    private String Five(int number) {
+        if (number >= 5) return "V";
         else return "";
     }
 }

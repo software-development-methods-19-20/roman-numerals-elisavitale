@@ -44,7 +44,7 @@ public class RomanNumeral {
         } else if (decimal == 4) {
             return "I" + "V";
         } else {
-            return "V";
+            return "V" + "I".repeat(decimal % 5);
         }
     }
 }

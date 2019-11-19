@@ -2,7 +2,6 @@ package test.roman;
 
 import dssc.roman.RomanNumeral;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class DecimalToRomanNumeralTest {
@@ -12,7 +11,7 @@ public class DecimalToRomanNumeralTest {
 
     private void check(int decimal, String expected) {
         RomanNumeral romanNumeral = new RomanNumeral(decimal);
-        Assertions.assertEquals(expected, romanNumeral.toString());
+        Assertions.assertEquals(expected, romanNumeral.fromArabicToRomanNumber());
     }
 
     @Test

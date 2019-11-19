@@ -16,6 +16,7 @@ public class RomanNumeral {
         HashMap<Integer, String> table = new HashMap<>();
         table.put(1, "I");
         table.put(5, "V");
+        table.put(10, "X");
         return table;
     }
 
@@ -48,8 +49,10 @@ public class RomanNumeral {
             return "I".repeat(decimal);
         } else if (decimal == 4) {
             return "I" + "V";
-        } else {
+        } else if (decimal < 9) {
             return "V" + "I".repeat(decimal % 5);
+        } else {
+            return "I" + "X";
         }
     }
 }

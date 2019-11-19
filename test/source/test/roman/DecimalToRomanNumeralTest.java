@@ -45,6 +45,8 @@ public class DecimalToRomanNumeralTest {
     }
 
     @Test
-    void sixIsVI() { check(6, "VI");
-    }
+    void sixIsVI() { check(6, "VI"); }
+
+    @Test
+    void nineIsIX() { check(9, "IX"); }
 }

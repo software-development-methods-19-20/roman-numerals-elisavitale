@@ -65,23 +65,37 @@ public class RomanNumeral {
 
     private String getRomanUnits(int number) {
         number %= 10;
-        if (number % 5 == 4) {
-            return "I" + fiveOrTen(number);
+        int powerOfTen = 0;
+        if (equalsNextSymbolMinusOnePower(number, powerOfTen)) {
+            return onePower(powerOfTen) + nextSymbol(number, powerOfTen);
         } else {
-            return Five(number) + Ones(number);
+            return Five(number, powerOfTen) + Ones(number, powerOfTen);
         }
     }
 
-    private String fiveOrTen(int number) {
-        return conversionTable.get(number + 1);
+    private boolean equalsNextSymbolMinusOnePower(int number, int powerOfTen) {
+        return number % (5*Math.pow(10, powerOfTen)) == 4*Math.pow(10, powerOfTen);
     }
 
-    private String Ones(int number) {
-        return "I".repeat(number % 5);
+    private String onePower(int powerOfTen) {
+        return conversionTable.get((int) Math.pow(10, powerOfTen));
     }
 
-    private String Five(int number) {
-        if (number >= 5) return "V";
+    private String nextSymbol(int number, int powerOfTen) {
+        return conversionTable.get(number + ((int) Math.pow(10, powerOfTen)));
+    }
+
+    private String Ones(int number, int powerOfTen) {
+        return conversionTable.get((int) Math.pow(10, powerOfTen)).repeat(number % 5);
+    }
+
+    private String Five(int number, int powerOfTen) {
+        if (number >= 5*((int) Math.pow(10, powerOfTen)))
+            return conversionTable.get(5*((int) Math.pow(10, powerOfTen)));
         else return "";
+    }
+
+    private int tenToThe(int power) {
+        return (int) Math.pow(10, power);
     }
 }

@@ -6,13 +6,13 @@ public class RomanNumeral {
 
     private int decimal;
 
-    private RomanNumeral(int decimal) {
+    public RomanNumeral(int decimal) {
         this.decimal = decimal;
     }
 
     private HashMap<Integer, String> conversionTable = fillConversionTable();
 
-    public HashMap<Integer, String> fillConversionTable() {
+    private HashMap<Integer, String> fillConversionTable() {
         HashMap<Integer, String> table = new HashMap<>();
         table.put(1, "I");
         table.put(5, "V");
@@ -24,7 +24,7 @@ public class RomanNumeral {
         return table;
     }
 
-    public String fromArabicToRoman() {
+    public String fromDecimalToRoman() {
         if (decimal == 0) {
             return "";
         } else {
@@ -36,19 +36,19 @@ public class RomanNumeral {
         if (decimalFoundInConversionTable(decimal)) {
             return conversionTable.get(decimal);
         } else
-            return decomposeDecimalAndWriteRomanNumber();
+            return decomposeDecimalAndWriteRomanNumeral();
     }
 
     public boolean decimalFoundInConversionTable(int number) {
         return conversionTable.containsKey(number);
     }
 
-    private String decomposeDecimalAndWriteRomanNumber() {
-        return getRomanTens(decimal) + getRomanUnits(decimal);
+    private String decomposeDecimalAndWriteRomanNumeral() {
+        return getRomanTens() + getRomanUnits();
     }
 
-    private String getRomanTens(int number) {
-        int tens = (number % 100) - (number % 10) ;
+    private String getRomanTens() {
+        int tens = (decimal % 100) - (decimal % 10) ;
         int powerOfTen = 1;
         if (decimalFoundInConversionTable(tens))
             return conversionTable.get(tens);
@@ -56,8 +56,8 @@ public class RomanNumeral {
             return twoCases(tens, powerOfTen);
     }
 
-    private String getRomanUnits(int number) {
-        int units = number % 10;
+    private String getRomanUnits() {
+        int units = decimal % 10;
         int powerOfTen = 0;
         if (decimalFoundInConversionTable(units))
             return conversionTable.get(units);
@@ -69,7 +69,7 @@ public class RomanNumeral {
         if (equalsNextSymbolMinusOnePower(number, power)) {
             return nextSymbolMinusOnePower(number, power);
         } else {
-            return writeVLD(number, power) + remainingPowersOfTen(number, power);
+            return fiveTimesPowerOfTen(number, power) + remainingPowersOfTen(number, power);
         }
     }
 
@@ -93,7 +93,7 @@ public class RomanNumeral {
         return oneRomanPower(power).repeat((number % (5*tenToThe(power))) / tenToThe(power));
     }
 
-    private String writeVLD(int number, int power) {
+    private String fiveTimesPowerOfTen(int number, int power) {
         if (number >= 5*(tenToThe(power)))
             return conversionTable.get(5*tenToThe(power));
         else return "";

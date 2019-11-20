@@ -44,7 +44,16 @@ public class RomanNumeral {
     }
 
     private String decomposeDecimalAndWriteRomanNumeral() {
-        return getRomanTens() + getRomanUnits();
+        return getRomanHundreds() + getRomanTens() + getRomanUnits();
+    }
+
+    private String getRomanHundreds() {
+        int hundreds = (decimal % 1000) - (decimal % 100);
+        int powerOfTen = 2;
+        if (decimalFoundInConversionTable(hundreds))
+            return conversionTable.get(hundreds);
+        else
+            return twoCases(hundreds, powerOfTen);
     }
 
     private String getRomanTens() {

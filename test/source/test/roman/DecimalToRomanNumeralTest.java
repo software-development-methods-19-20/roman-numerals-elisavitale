@@ -10,8 +10,8 @@ public class DecimalToRomanNumeralTest {
     }
 
     private void check(int decimal, String expected) {
-        RomanNumeral romanNumeral = new RomanNumeral();
-        Assertions.assertEquals(expected, romanNumeral.fromArabicToRoman(decimal));
+        RomanNumeral romanNumeral = new RomanNumeral(decimal);
+        Assertions.assertEquals(expected, romanNumeral.fromDecimalToRoman());
     }
 
     @Test
@@ -58,4 +58,10 @@ public class DecimalToRomanNumeralTest {
 
     @Test
     void fortyeightIsXLVIII() { check(48, "XLVIII"); }
+
+    @Test
+    void oneHundredTwentySevenIsCXXVII() { check(127, "CXXVII"); }
+
+    @Test
+    void fourHundredNinetyEightIsCDXCVIII() { check(498, "CDXCVIII"); }
 }
